@@ -2,128 +2,357 @@
 
     <style>
         body {
-            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            background: linear-gradient(135deg, #f3e5f5 0%, #ffffff 50%, #e1bee7 100%);
+            background-attachment: fixed;
             min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Floating decorative elements for NGO theme */
+        .floating-element {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .element-1 {
+            top: 15%;
+            left: 8%;
+            font-size: 4rem;
+            animation-delay: 0s;
+        }
+
+        .element-2 {
+            top: 25%;
+            right: 12%;
+            font-size: 3rem;
+            animation-delay: 1.5s;
+        }
+
+        .element-3 {
+            bottom: 35%;
+            left: 10%;
+            font-size: 3.5rem;
+            animation-delay: 3s;
+        }
+
+        .element-4 {
+            bottom: 20%;
+            right: 8%;
+            font-size: 2.5rem;
+            animation-delay: 4.5s;
+        }
+
+        .element-5 {
+            top: 40%;
+            left: 50%;
+            font-size: 3rem;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .ngo-register-container {
+            min-height: 95vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .ngo-register-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 25px 60px rgba(142, 36, 170, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            width: 100%;
+            max-width: 580px;
             position: relative;
             overflow: hidden;
+            transition: transform 0.3s ease;
         }
 
-        .svg-pattern {
-            position: absolute;
-            z-index: 0;
-            opacity: 0.2;
-            pointer-events: none;
-        }
-
-        .svg-top-left {
-            top: 0;
-            left: 0;
-            width: 300px;
-        }
-
-        .svg-bottom-right {
-            bottom: 0;
-            right: 0;
-            width: 350px;
-        }
-
-        .overlay {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            transition: transform 0.3s;
-        }
-
-        .overlay:hover {
+        .ngo-register-card:hover {
             transform: translateY(-5px);
         }
 
-        .form-label {
-            font-weight: 600;
-            color: #1e3a8a;
+        .ngo-register-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(142, 36, 170, 0.05) 0%, transparent 70%);
+            animation: float 10s ease-in-out infinite;
         }
+
+        .ngo-register-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .ngo-register-title {
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: #8e24aa;
+            text-align: center;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #8e24aa, #ab47bc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .ngo-register-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .ngo-register-icon {
+            font-size: 4.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            display: block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-12px); }
+            60% { transform: translateY(-6px); }
+        }
+
+        .form-label {
+            color: #7b1fa2;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+
+        .form-label::before {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        .form-label[for="name"]::before { content: "🏢"; }
+        .form-label[for="email"]::before { content: "📧"; }
+        .form-label[for="phone"]::before { content: "📱"; }
+        .form-label[for="address"]::before { content: "📍"; }
+        .form-label[for="city"]::before { content: "🏙️"; }
+        .form-label[for="password"]::before { content: "🔒"; }
 
         .form-control {
-            border-radius: 10px;
+            border-radius: 15px;
+            border: 2px solid #e1bee7;
+            padding: 14px 18px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            margin-bottom: 18px;
         }
 
-        .btn-primary {
-            background: linear-gradient(90deg, #1e88e5, #42a5f5);
+        .form-control:focus {
+            border-color: #8e24aa;
+            box-shadow: 0 0 0 0.2rem rgba(142, 36, 170, 0.25);
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .form-control::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .ngo-register-btn {
+            background: linear-gradient(45deg, #8e24aa, #ab47bc);
             border: none;
-            font-weight: bold;
-            border-radius: 10px;
+            padding: 18px 40px;
+            border-radius: 25px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(142, 36, 170, 0.4);
+            position: relative;
+            overflow: hidden;
+            margin-top: 25px;
         }
 
-        .btn-primary:hover {
-            background: linear-gradient(90deg, #1565c0, #1e88e5);
+        .ngo-register-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
         }
 
-        .card-title {
-            color: #0d47a1;
-            font-weight: bold;
-            font-size: 1.8rem;
+        .ngo-register-btn:hover::before {
+            left: 100%;
+        }
+
+        .ngo-register-btn:hover {
+            background: linear-gradient(45deg, #ab47bc, #8e24aa);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px rgba(142, 36, 170, 0.5);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+        }
+
+        .login-link a {
+            color: #8e24aa;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #ab47bc;
+            text-decoration: underline;
+        }
+
+        .ngo-badge {
+            background: linear-gradient(135deg, #e1bee7 0%, #f3e5f5 100%);
+            color: #7b1fa2;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 2px solid rgba(142, 36, 170, 0.2);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .ngo-register-card {
+                margin: 20px;
+                padding: 30px 25px;
+            }
+            
+            .ngo-register-title {
+                font-size: 1.9rem;
+            }
+
+            .floating-element {
+                display: none;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .ngo-register-icon {
+                font-size: 3.5rem;
+            }
+            
+            .ngo-register-title {
+                font-size: 1.7rem;
+            }
         }
     </style>
 
-    <!-- Background SVG Patterns -->
-    <svg class="svg-pattern svg-top-left" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#90caf9"
-            d="M44.8,-72.2C59.1,-61.5,72.6,-50.3,77.6,-36.5C82.5,-22.6,78.9,-6.2,72.6,7.5C66.3,21.2,57.2,32.3,47.1,45.3C36.9,58.4,25.6,73.3,10.2,77.2C-5.2,81.1,-24.7,74.1,-40.3,63.3C-55.9,52.5,-67.5,38,-75.6,21.6C-83.8,5.2,-88.5,-13,-81.4,-27.9C-74.4,-42.9,-55.5,-54.7,-38.2,-64.9C-20.9,-75.2,-10.4,-83.8,2.2,-87.3C14.8,-90.9,29.5,-89.1,44.8,-72.2Z"
-            transform="translate(100 100)" />
-    </svg>
+    <!-- Floating decorative elements for NGO theme -->
+    <div class="floating-element element-1">🏥</div>
+    <div class="floating-element element-2">💜</div>
+    <div class="floating-element element-3">🐾</div>
+    <div class="floating-element element-4">🏢</div>
+    <div class="floating-element element-5">❤️</div>
 
-    <svg class="svg-pattern svg-bottom-right" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#64b5f6"
-            d="M49.3,-66.4C64.4,-56.5,76.6,-42.3,78.3,-26.5C79.9,-10.7,71,6.6,62.5,22.6C54,38.5,45.8,53,33.8,61.7C21.8,70.4,5.9,73.2,-8.6,74.6C-23,76.1,-36.1,76.2,-48.5,69.6C-60.8,62.9,-72.3,49.5,-75.6,35C-78.8,20.6,-73.9,5.1,-67.7,-9.1C-61.5,-23.3,-54,-36.2,-43.7,-46.5C-33.3,-56.8,-20.1,-64.5,-5.2,-66.8C9.8,-69.1,19.6,-66.2,49.3,-66.4Z"
-            transform="translate(100 100)" />
-    </svg>
+    <div class="ngo-register-container">
+        <div class="ngo-register-card">
+            <div class="ngo-register-content">
+                <!-- Icon -->
+                <div class="ngo-register-icon">🏥</div>
+                
+                <!-- Title -->
+                <h3 class="ngo-register-title">Join as NGO Partner</h3>
+                <p class="ngo-register-subtitle">Register your organization to help rescue and treat street animals</p>
 
-    <!-- Form Container -->
-    <div class="container d-flex justify-content-center align-items-center mt-5"
-        style="min-height: 85vh; position: relative; z-index: 1;">
-        <div class="overlay text-center" style="width: 100%; max-width: 520px;">
-
-            <!-- Title -->
-            <h3 class="mb-4 card-title">Register (NGO)</h3>
-
-            <!-- NGO Registration Form -->
-            <form action="/auth/register/ngo" method="POST">
-                <div class="mb-3 text-start">
-                    <label class="form-label">NGO Name</label>
-                    <input name="name" class="form-control" placeholder="Organization Name" required>
+                <!-- NGO Badge -->
+                <div class="ngo-badge">
+                    🏆 Verified NGO Registration Portal
                 </div>
 
-                <div class="mb-3 text-start">
-                    <label class="form-label">Email</label>
-                    <input name="email" type="email" class="form-control" placeholder="ngo@example.com" required>
-                </div>
+                <!-- NGO Registration Form -->
+                <form action="/auth/register/ngo" method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">NGO/Organization Name</label>
+                        <input name="name" id="name" class="form-control" placeholder="Enter your organization's full name" required>
+                    </div>
 
-                <div class="mb-3 text-start">
-                    <label class="form-label">Phone</label>
-                    <input name="phone" class="form-control" placeholder="1234567890" required>
-                </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Official Email Address</label>
+                        <input name="email" id="email" type="email" class="form-control" placeholder="contact@yourngo.org" required>
+                    </div>
 
-                <div class="mb-3 text-start">
-                    <label class="form-label">Address</label>
-                    <input name="address" class="form-control" placeholder="Complete Address" required>
-                </div>
+                    <div class="form-row">
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Contact Number</label>
+                            <input name="phone" id="phone" class="form-control" placeholder="Organization phone" required>
+                        </div>
 
-                <div class="mb-3 text-start">
-                    <label class="form-label">City</label>
-                    <input name="city" class="form-control" placeholder="City Name" required>
-                </div>
+                        <div class="mb-3">
+                            <label for="city" class="form-label">City</label>
+                            <input name="city" id="city" class="form-control" placeholder="Operating city" required>
+                        </div>
+                    </div>
 
-                <div class="mb-4 text-start">
-                    <label class="form-label">Password</label>
-                    <input name="password" type="password" class="form-control" placeholder="********" required>
-                </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Complete Address</label>
+                        <input name="address" id="address" class="form-control" placeholder="Full address with landmarks" required>
+                    </div>
 
-                <div class="d-grid">
-                    <button class="btn btn-primary">Register</button>
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Secure Password</label>
+                        <input name="password" id="password" type="password" class="form-control" placeholder="Create a strong password" required>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="ngo-register-btn">
+                            🚀 Register NGO Organization
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Login Link -->
+                <div class="login-link">
+                    Already registered as an NGO?
+                    <a href="/auth/login/ngo">Sign in here</a>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 
