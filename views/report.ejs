@@ -2,94 +2,266 @@
 
     <style>
         body {
-            background: linear-gradient(to right, #c7d2fe, #d1fae5);
-            /* Soft violet to mint */
+            background: linear-gradient(135deg, #f3e5f5 0%, #ffffff 50%, #e1bee7 100%);
+            background-attachment: fixed;
             min-height: 100vh;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .report-container {
+            padding: 40px 0;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(142, 36, 170, 0.95), rgba(171, 71, 188, 0.9)),
+                        url("https://images.unsplash.com/photo-1601758228041-f3b2795255f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80") center/cover no-repeat;
+            padding: 60px 20px;
+            color: white;
+            border-radius: 30px;
+            margin: 20px auto 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(142, 36, 170, 0.4);
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 0;
         }
 
         .form-card {
-            background-color: #f0f9ff;
-            /* Soft blueish background */
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 25px 60px rgba(142, 36, 170, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(142, 36, 170, 0.03) 0%, transparent 70%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .form-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-section-title {
+            color: #8e24aa;
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            text-align: center;
+            background: linear-gradient(45deg, #8e24aa, #ab47bc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-label {
+            color: #7b1fa2;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-label i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        .form-control, textarea {
             border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            padding: 35px;
-            border: 2px solid #93c5fd;
+            border: 2px solid #e1bee7;
+            padding: 15px 20px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .form-control:focus, textarea:focus {
+            border-color: #8e24aa;
+            box-shadow: 0 0 0 0.25rem rgba(142, 36, 170, 0.25);
+            background: white;
+            transform: translateY(-2px);
         }
 
         #map {
-            height: 300px;
-            border-radius: 12px;
-            border: 2px solid #bae6fd;
+            height: 350px;
+            border-radius: 20px;
+            border: 3px solid #e1bee7;
+            box-shadow: 0 15px 35px rgba(142, 36, 170, 0.2);
+            overflow: hidden;
         }
 
-        label {
-            color: #0c4a6e;
-            font-weight: 600;
+        .map-instruction {
+            background: linear-gradient(135deg, #e1bee7 0%, #f3e5f5 100%);
+            color: #7b1fa2;
+            padding: 15px 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            text-align: center;
+            border: 2px solid rgba(142, 36, 170, 0.2);
         }
 
-        .form-control,
-        textarea {
-            border-radius: 10px;
-            border: 1px solid #93c5fd;
-        }
-
-        .form-control:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.25);
-        }
-
-        .btn-custom {
-            background-color: #10b981;
+        .submit-btn {
+            background: linear-gradient(45deg, #8e24aa, #ab47bc);
+            border: none;
+            padding: 18px 40px;
+            border-radius: 25px;
             color: white;
-            font-weight: bold;
-            border-radius: 10px;
-            padding: 10px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(142, 36, 170, 0.4);
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
         }
 
-        .btn-custom:hover {
-            background-color: #059669;
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(45deg, #ab47bc, #8e24aa);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(142, 36, 170, 0.5);
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .donation-info {
+            background: linear-gradient(135deg, rgba(142, 36, 170, 0.1), rgba(171, 71, 188, 0.1));
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 10px;
+            border: 2px solid rgba(142, 36, 170, 0.2);
+        }
+
+        .donation-info p {
+            margin: 0;
+            color: #7b1fa2;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .form-card {
+                margin: 20px;
+                padding: 30px 25px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            #map {
+                height: 250px;
+            }
         }
     </style>
 
-    <div class="container py-5">
-        <h2 class="text-center text-primary mb-4 fw-bold">🐾 Report a Street Animal</h2>
+    <div class="container report-container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="hero-title">Report a Street Animal 📸</h1>
+            <p class="hero-subtitle">Help us help them - Every report can save a life</p>
+        </div>
 
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-lg-8 col-md-10">
                 <div class="form-card">
+                    <div class="form-content">
+                        <h3 class="form-section-title">🐾 Animal Report Form</h3>
 
-                    <form action="/report" method="POST" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="photo" class="form-label">Upload Animal Photo</label>
-                            <input type="file" class="form-control" name="photo" required>
-                        </div>
+                        <form action="/report" method="POST" enctype="multipart/form-data">
+                            <div class="input-group">
+                                <label for="photo" class="form-label">
+                                    📷 Upload Animal Photo
+                                </label>
+                                <input type="file" class="form-control" name="photo" accept="image/*" required>
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Animal Condition</label>
-                            <textarea class="form-control" name="description" rows="3"
-                                placeholder="Describe the animal and its condition..."></textarea>
-                        </div>
+                            <div class="input-group">
+                                <label for="description" class="form-label">
+                                    📝 Animal Condition & Description
+                                </label>
+                                <textarea class="form-control" name="description" rows="4"
+                                    placeholder="Please describe the animal's condition, behavior, and any visible injuries or health concerns..."></textarea>
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="donationIntent" class="form-label">Donation You Can Offer (₹)</label>
-                            <input type="number" class="form-control" name="donationIntent" min="0"
-                                placeholder="Optional">
-                        </div>
+                            <div class="input-group">
+                                <label for="donationIntent" class="form-label">
+                                    💰 Donation Offer (₹)
+                                </label>
+                                <input type="number" class="form-control" name="donationIntent" min="0"
+                                    placeholder="Optional - Amount you can contribute for treatment">
+                                <div class="donation-info">
+                                    <p>💡 Your donation helps cover medical treatment, food, and care for the rescued animal</p>
+                                </div>
+                            </div>
 
-                        <input type="hidden" name="lat" id="lat">
-                        <input type="hidden" name="lng" id="lng">
+                            <input type="hidden" name="lat" id="lat">
+                            <input type="hidden" name="lng" id="lng">
 
-                        <div class="mb-3">
-                            <label class="form-label">Mark Location on Map</label>
-                            <div id="map"></div>
-                        </div>
+                            <div class="input-group">
+                                <label class="form-label">
+                                    📍 Mark Animal Location on Map
+                                </label>
+                                <div class="map-instruction">
+                                    📌 Click on the map to pinpoint exactly where you found the animal
+                                </div>
+                                <div id="map"></div>
+                            </div>
 
-                        <div class="d-grid mt-4">
-                            <button type="submit" class="btn btn-custom btn-lg">📤 Submit Report</button>
-                        </div>
-                    </form>
-
+                            <div class="d-grid">
+                                <button type="submit" class="submit-btn">
+                                    🚀 Submit Report & Help Animal
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -100,7 +272,7 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
     <script>
-        const map = L.map('map').setView([28.6139, 77.2090], 13); // Default location
+        const map = L.map('map').setView([28.6139, 77.2090], 13); // Default location: Delhi, India
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'
@@ -116,9 +288,20 @@
             if (marker) {
                 marker.setLatLng(e.latlng);
             } else {
-                marker = L.marker(e.latlng).addTo(map);
+                marker = L.marker(e.latlng).addTo(map)
+                    .bindPopup('📍 Animal found here')
+                    .openPopup();
             }
         });
+
+        // Try to get user's current location
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                map.setView([lat, lng], 15);
+            });
+        }
     </script>
 
     <%- include("partials/footer") %>
