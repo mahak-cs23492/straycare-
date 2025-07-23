@@ -2,81 +2,222 @@
 
     <style>
         body {
-            background: linear-gradient(135deg, #f0fff0 0%, #e0ffe0 100%);
+            background: linear-gradient(135deg, #f3e5f5 0%, #ffffff 50%, #e1bee7 100%);
+            background-attachment: fixed;
+        }
+
+        .section-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px 30px;
+            margin: 40px auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .section-title {
-            background: linear-gradient(to right, #56ab2f, #a8e063);
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            background: linear-gradient(45deg, #8e24aa, #ab47bc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-align: center;
+            position: relative;
         }
 
-        .card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-radius: 20px;
-            overflow: hidden;
-            background: #ffffff;
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #8e24aa, #ba68c8);
+            border-radius: 2px;
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-footer {
-            background-color: #f8f9fa;
-        }
-
-        .btn-outline-success {
+        .adoption-card {
+            background: white;
             border-radius: 25px;
-            padding: 8px 20px;
-            font-weight: 500;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .adoption-card::before {
+            content: '💜';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 3;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .adoption-card:hover::before {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .adoption-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .adoption-card .card-img-top {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .adoption-card:hover .card-img-top {
+            transform: scale(1.1);
+        }
+
+        .adoption-card .card-body {
+            padding: 25px;
+            background: linear-gradient(135deg, #8e24aa 0%, #ba68c8 100%);
+            color: white;
+        }
+
+        .adoption-card .card-title {
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .adoption-card .card-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .adoption-card .card-footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border: none;
+        }
+
+        .view-details-btn {
+            background: linear-gradient(45deg, #8e24aa, #ab47bc);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .view-details-btn:hover {
+            background: linear-gradient(45deg, #ab47bc, #8e24aa);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(142, 36, 170, 0.4);
+            color: white;
         }
 
         .no-animals {
-            background-color: #fce4ec;
-            color: #c2185b;
-            border-radius: 10px;
-            padding: 20px;
-            font-weight: bold;
+            background: linear-gradient(135deg, #e1bee7 0%, #f3e5f5 100%);
+            color: #7b1fa2;
+            border-radius: 20px;
+            padding: 40px;
+            font-weight: 600;
+            text-align: center;
+            border: 2px solid rgba(142, 36, 170, 0.2);
         }
 
-        .card-body {
-            background: rgba(240, 255, 240, 0.5);
+        .no-animals-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(142, 36, 170, 0.95), rgba(171, 71, 188, 0.9)),
+                        url("https://images.unsplash.com/photo-1601758228041-f3b2795255f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80") center/cover no-repeat;
+            padding: 80px 20px;
+            color: white;
+            border-radius: 30px;
+            margin: 20px auto 60px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(142, 36, 170, 0.4);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.95;
         }
     </style>
 
     <div class="container py-5">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Find Your Perfect Companion 🐾</h1>
+                <p class="hero-subtitle">Give a rescued animal the loving home they deserve</p>
+            </div>
+        </div>
 
-        <!-- Section Title -->
-        <h2 class="mb-5 text-center fw-bold section-title">Animals Available for Adoption 🐶🐱</h2>
+        <!-- Adoption Cards Section -->
+        <div class="section-container">
+            <h2 class="section-title">Animals Available for Adoption 🏠💕</h2>
 
-        <% if (animals.length===0) { %>
-            <p class="text-center no-animals">No animals are currently available for adoption.</p>
+            <% if (animals.length === 0) { %>
+                <div class="no-animals">
+                    <span class="no-animals-icon">🐾</span>
+                    <h4>No animals are currently available for adoption</h4>
+                    <p>Check back soon as we regularly update our listings with animals ready for their forever homes!</p>
+                </div>
             <% } else { %>
-                <div class="row row-cols-1 row-cols-md-3 g-4">
-                    <% animals.forEach(animal=> { %>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    <% animals.forEach(animal => { %>
                         <div class="col">
-                            <div class="card h-100 shadow border-0">
-                                <img src="<%= animal.afterPhotoUrl %>" class="card-img-top" alt="Adoptable Animal"
-                                    style="height: 250px; object-fit: cover;">
+                            <div class="card adoption-card h-100">
+                                <img src="<%= animal.afterPhotoUrl %>" class="card-img-top" alt="Adoptable Animal">
                                 <div class="card-body">
-                                    <h5 class="card-title text-success fw-bold">Fee: ₹<%= animal.adoptionFee %>
-                                    </h5>
-                                    <p class="card-text text-muted">
+                                    <h5 class="card-title">💰 Adoption Fee: ₹<%= animal.adoptionFee %></h5>
+                                    <p class="card-text">
                                         <%= animal.healthNotes.substring(0, 100) %>...
                                     </p>
                                 </div>
-                                <div class="card-footer text-center">
-                                    <a href="/adoption/<%= animal._id %>" class="btn btn-outline-success">View
-                                        Details</a>
+                                <div class="card-footer">
+                                    <a href="/adoption/<%= animal._id %>" class="view-details-btn">
+                                        💕 View Details & Adopt
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <% }) %>
+                    <% }) %>
                 </div>
-                <% } %>
-
+            <% } %>
+        </div>
     </div>
 
     <%- include("../partials/footer") %>
