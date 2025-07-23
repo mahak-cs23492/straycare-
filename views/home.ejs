@@ -476,62 +476,58 @@
         <div class="section-container">
             <h2 class="section-heading">🌟 Recently Treated Animals</h2>
 
-            <% if (animals.length === 0) { %>
-                <div class="no-content">
-                    <div class="no-content-icon">🐾</div>
-                    <h4>No treated animals to display yet</h4>
-                    <p>Be the first to report a stray animal in need!</p>
-                </div>
-
-                <!-- Sample adoption-ready dogs while no real data exists -->
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                    <!-- Cute Beagle Ready for Adoption -->
-                    <div class="col">
-                        <div class="card animal-card h-100">
-                            <img src="https://images.pexels.com/photos/30432649/pexels-photo-30432649.jpeg" class="card-img-top" alt="Cute Beagle Ready for Adoption">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    🏠 Ready for Adoption!
-                                </h5>
-                                <p class="card-text">Meet Buddy! This charming beagle is fully recovered, vaccinated, and ready to bring joy to a loving family. He's friendly, house-trained, and great with kids!</p>
-                            </div>
-                            <div class="card-footer bg-transparent border-0 text-center">
-                                <a href="/adoption" class="adopt-btn">💕 View for Adoption</a>
-                            </div>
+            <!-- Always show cute sample dogs for demonstration -->
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <!-- Cute Beagle Ready for Adoption -->
+                <div class="col">
+                    <div class="card animal-card h-100">
+                        <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Cute Beagle Ready for Adoption">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                ���� Ready for Adoption!
+                            </h5>
+                            <p class="card-text">Meet Buddy! This charming beagle is fully recovered, vaccinated, and ready to bring joy to a loving family. He's friendly, house-trained, and great with kids!</p>
                         </div>
-                    </div>
-
-                    <!-- Adorable Golden Retriever Ready for Adoption -->
-                    <div class="col">
-                        <div class="card animal-card h-100">
-                            <img src="https://images.pexels.com/photos/27680249/pexels-photo-27680249.jpeg" class="card-img-top" alt="Golden Retriever Ready for Adoption">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    🏠 Ready for Adoption!
-                                </h5>
-                                <p class="card-text">Luna is a playful golden retriever who loves fetch and cuddles! She's been treated for minor injuries and is now healthy, energetic, and looking for her forever home.</p>
-                            </div>
-                            <div class="card-footer bg-transparent border-0 text-center">
-                                <a href="/adoption" class="adopt-btn">💕 View for Adoption</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Healthy Treated Animal -->
-                    <div class="col">
-                        <div class="card animal-card h-100">
-                            <img src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg" class="card-img-top" alt="Healthy Treated Dog">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    ✨ Treated & Healthy
-                                </h5>
-                                <p class="card-text">Max was successfully treated for a leg injury and has made a full recovery! He's been returned to his area but continues to be monitored by our team.</p>
-                            </div>
+                        <div class="card-footer bg-transparent border-0 text-center">
+                            <a href="/adoption" class="adopt-btn">💕 View for Adoption</a>
                         </div>
                     </div>
                 </div>
-            <% } else { %>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+                <!-- Adorable Golden Retriever Ready for Adoption -->
+                <div class="col">
+                    <div class="card animal-card h-100">
+                        <img src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Golden Retriever Ready for Adoption">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                🏠 Ready for Adoption!
+                            </h5>
+                            <p class="card-text">Luna is a playful golden retriever who loves fetch and cuddles! She's been treated for minor injuries and is now healthy, energetic, and looking for her forever home.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 text-center">
+                            <a href="/adoption" class="adopt-btn">💕 View for Adoption</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cute Puppy Ready for Adoption -->
+                <div class="col">
+                    <div class="card animal-card h-100">
+                        <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Cute Puppy Ready for Adoption">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                🏠 Ready for Adoption!
+                            </h5>
+                            <p class="card-text">Charlie is an adorable puppy who was rescued and nursed back to health. He's playful, loving, and ready for a family to call his own!</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 text-center">
+                            <a href="/adoption" class="adopt-btn">💕 View for Adoption</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database animals (if any) -->
+                <% if (animals.length > 0) { %>
                     <% animals.forEach(function(animal) { %>
                         <div class="col">
                             <div class="card animal-card h-100">
@@ -550,8 +546,8 @@
                             </div>
                         </div>
                     <% }); %>
-                </div>
-            <% } %>
+                <% } %>
+            </div>
         </div>
 
         <!-- Sponsored Pet Shops Section -->
