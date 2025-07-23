@@ -1,135 +1,475 @@
 <%- include("partials/header") %>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
         body {
-            background: linear-gradient(to bottom right, #e6f5e9, #fffbe7);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             background-attachment: fixed;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Floating paw prints animation */
+        .paw-print {
+            position: fixed;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
 
         .hero-section {
-            background: url("https://images.unsplash.com/photo-1583337130417-3346a1f6a5f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80") center/cover no-repeat;
-            padding: 120px 20px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.9), rgba(255, 142, 83, 0.9)),
+                        url("https://images.unsplash.com/photo-1601758228041-f3b2795255f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80") center/cover no-repeat;
+            padding: 100px 20px;
             color: white;
-            border-radius: 20px;
-            margin-bottom: 60px;
+            border-radius: 30px;
+            margin: 20px auto 60px;
             position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
-        .hero-section::after {
-            content: "";
+        .hero-section::before {
+            content: "🐾";
             position: absolute;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 20px;
+            top: -50px;
+            right: -50px;
+            font-size: 200px;
+            opacity: 0.1;
+            animation: rotate 20s linear infinite;
         }
 
-        .hero-section .content {
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideInDown 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .action-buttons {
+            margin-top: 30px;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 0 10px;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+            color: white;
+        }
+
+        .section-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px 30px;
+            margin: 40px auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .section-heading {
             font-weight: 700;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            border-radius: 2px;
+        }
+
+        .animal-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            position: relative;
             margin-bottom: 30px;
         }
 
-        .card:hover {
-            transform: scale(1.02);
-            transition: all 0.2s ease-in-out;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        .animal-card::before {
+            content: '💖';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 3;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: all 0.3s ease;
         }
 
-        .card-title {
-            font-weight: 600;
-            color: #1b4332;
+        .animal-card:hover::before {
+            opacity: 1;
+            transform: scale(1.2);
         }
 
-        .card-text {
-            font-size: 0.95rem;
-            color: #555;
+        .animal-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
         }
 
-        .btn-outline-primary {
-            border-color: #2a9d8f;
-            color: #2a9d8f;
+        .animal-card .card-img-top {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
         }
 
-        .btn-outline-primary:hover {
-            background-color: #2a9d8f;
+        .animal-card:hover .card-img-top {
+            transform: scale(1.1);
+        }
+
+        .animal-card .card-body {
+            padding: 25px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
+        }
+
+        .animal-card .card-title {
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .animal-card .card-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .adopt-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .adopt-btn:hover {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .ad-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+
+        .ad-card::before {
+            content: '🛍️';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 2;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 5px 8px;
+            border-radius: 10px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .ad-card:hover::before {
+            opacity: 1;
+        }
+
+        .ad-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .ad-card .card-img-top {
+            height: 200px;
+            object-fit: contain;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .ad-card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+
+        .ad-card .card-body {
+            padding: 20px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .ad-card .card-title {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 30px;
+            border-radius: 30px;
+            margin: 60px auto;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .floating-action-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+        }
+
+        .floating-action-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        }
+
+        .no-content {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .no-content-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-heading {
+                font-size: 2rem;
+            }
         }
     </style>
 
-    <div class="container">
+    <!-- Floating paw prints for ambient animation -->
+    <div class="paw-print" style="top: 10%; left: 10%; animation-delay: 0s;">🐾</div>
+    <div class="paw-print" style="top: 20%; right: 20%; animation-delay: 1s;">🐾</div>
+    <div class="paw-print" style="bottom: 30%; left: 15%; animation-delay: 2s;">🐾</div>
+    <div class="paw-print" style="bottom: 10%; right: 10%; animation-delay: 3s;">🐾</div>
 
-        <!-- Welcome Hero Banner -->
-        <div class="hero-section text-center">
-            <div class="content">
-                <h1 class="display-4 fw-bold">Welcome to StrayCare 🐾</h1>
-                <p class="lead">Giving hope, health, and homes to street animals.</p>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-content text-center">
+                <h1 class="hero-title">Welcome to StrayCare 🐾</h1>
+                <p class="hero-subtitle">Giving hope, health, and homes to street animals in need</p>
+                <div class="action-buttons">
+                    <a href="/report/new" class="hero-btn">📸 Report a Stray</a>
+                    <a href="/adoption" class="hero-btn">���� Adopt Now</a>
+                </div>
             </div>
         </div>
 
-        <!-- Treated Animals Section -->
-        <h2 class="text-center section-heading text-success">Recently Treated Animals</h2>
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stat-item">
+                        <span class="stat-number">🐕 <%= animals.length %></span>
+                        <span class="stat-label">Animals Treated</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-item">
+                        <span class="stat-number">🏪 <%= ads.length %></span>
+                        <span class="stat-label">Partner Shops</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-item">
+                        <span class="stat-number">💝 500+</span>
+                        <span class="stat-label">Lives Saved</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <% if (animals.length===0) { %>
-            <p class="text-center text-muted">No treated animals to display yet.</p>
+        <!-- Recently Treated Animals Section -->
+        <div class="section-container">
+            <h2 class="section-heading">🌟 Recently Treated Animals</h2>
+
+            <% if (animals.length === 0) { %>
+                <div class="no-content">
+                    <div class="no-content-icon">🐾</div>
+                    <h4>No treated animals to display yet</h4>
+                    <p>Be the first to report a stray animal in need!</p>
+                </div>
             <% } else { %>
-                <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                     <% animals.forEach(function(animal) { %>
                         <div class="col">
-                            <div class="card h-100 shadow border-success">
-                                <img src="<%= animal.afterPhotoUrl %>" class="card-img-top" alt="Treated Animal"
-                                    style="height: 200px; object-fit: cover;">
+                            <div class="card animal-card h-100">
+                                <img src="<%= animal.afterPhotoUrl %>" class="card-img-top" alt="Treated Animal">
                                 <div class="card-body">
-                                    <h5 class="card-title text-center">
-                                        <%= animal.adoptable ? "Adopt Me!" : "Treated & Healthy" %>
+                                    <h5 class="card-title">
+                                        <%= animal.adoptable ? "🏠 Ready for Adoption!" : "✨ Treated & Healthy" %>
                                     </h5>
-                                    <p class="card-text">
-                                        <%= animal.healthNotes %>
-                                    </p>
+                                    <p class="card-text"><%= animal.healthNotes %></p>
                                 </div>
                                 <% if (animal.adoptable) { %>
-                                    <div class="card-footer text-center bg-transparent border-top-0">
-                                        <a href="/adoption" class="btn btn-outline-primary btn-sm">View for Adoption</a>
+                                    <div class="card-footer bg-transparent border-0 text-center">
+                                        <a href="/adoption" class="adopt-btn">💕 View for Adoption</a>
                                     </div>
-                                    <% } %>
+                                <% } %>
                             </div>
                         </div>
-                        <% }); %>
+                    <% }); %>
                 </div>
-                <% } %>
+            <% } %>
+        </div>
 
-                    <!-- Ads Section -->
-                    <hr class="my-5">
-                    <h2 class="text-center section-heading text-warning">Sponsored Pet Shops 🛍️</h2>
+        <!-- Sponsored Pet Shops Section -->
+        <div class="section-container">
+            <h2 class="section-heading">🛍️ Sponsored Pet Shops</h2>
 
-                    <% if (ads.length===0) { %>
-                        <p class="text-center text-muted">No ads to show right now.</p>
-                        <% } else { %>
-                            <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
-                                <% ads.forEach(function(ad) { %>
-                                    <div class="col">
-                                        <div class="card h-100 shadow-sm border-0">
-                                            <a href="<%= ad.link %>" target="_blank">
-                                                <img src="<%= ad.logoUrl %>" class="card-img-top"
-                                                    alt="<%= ad.shopName %> Logo"
-                                                    style="height: 200px; object-fit: contain; background-color: #fff; padding: 10px;">
-                                            </a>
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title">
-                                                    <%= ad.shopName %>
-                                                </h5>
-                                            </div>
-                                        </div>
+            <% if (ads.length === 0) { %>
+                <div class="no-content">
+                    <div class="no-content-icon">🏪</div>
+                    <h4>No partner shops to show right now</h4>
+                    <p>We're working on bringing you the best pet supplies!</p>
+                </div>
+            <% } else { %>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    <% ads.forEach(function(ad) { %>
+                        <div class="col">
+                            <div class="card ad-card h-100">
+                                <a href="<%= ad.link %>" target="_blank" style="text-decoration: none;">
+                                    <img src="<%= ad.logoUrl %>" class="card-img-top" alt="<%= ad.shopName %> Logo">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title"><%= ad.shopName %></h5>
                                     </div>
-                                    <% }); %>
+                                </a>
                             </div>
-                            <% } %>
-
+                        </div>
+                    <% }); %>
+                </div>
+            <% } %>
+        </div>
     </div>
 
-    <%- include("partials/footer") %>
+    <!-- Floating Action Button -->
+    <button class="floating-action-btn" onclick="window.location.href='/report/new'" title="Report a Stray Animal">
+        📢
+    </button>
+
+<%- include("partials/footer") %>
