@@ -8,7 +8,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 
-// Route imports
+// Route import
 const reportRoutes = require('./routes/report');
 const adoptionRoutes = require('./routes/adoption');
 const adoptRoutes = require('./routes/adopt');
