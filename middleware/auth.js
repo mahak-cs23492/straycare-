@@ -1,4 +1,4 @@
-// middleware/auth.js
+// middleware
 
 exports.isLoggedIn = (req, res, next) => {
     if (!req.session.userId) {
